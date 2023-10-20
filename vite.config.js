@@ -42,3 +42,12 @@ To automate the deployment process, in the exact order
 "deploy": "gh-pages -d dist",
 Notice! Deploy folder is dist (not build)
 */
+
+/*
+
+permissions and other settings on github:
+
+- settings => actions => general / workflow permissions: read and write
+- settings => pages => build and deployment / source: deploy from branch / branch: gh-pages
+---- source: github actions should work as well
+*/
