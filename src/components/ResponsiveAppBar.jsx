@@ -130,7 +130,7 @@ function ResponsiveAppBar() {
               >
                 <Link
                   style={{ textDecoration: 'none', color: 'white' }}
-                  to={`/pt-react-frontend/${page}`}
+                  to={`/${page}`}
                 >
                   {page}
                 </Link>
