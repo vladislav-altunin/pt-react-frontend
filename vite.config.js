@@ -6,7 +6,7 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig({
   //the name of the folder on github, needed for deployment
-  base: '/pt-react-frontend/Customers',
+  base: '/pt-react-frontend/',
   plugins: [react()],
   test: {
     //enables jest globals API
