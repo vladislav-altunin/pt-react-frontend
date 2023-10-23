@@ -45,7 +45,7 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -130,7 +130,7 @@ function ResponsiveAppBar() {
               >
                 <Link
                   style={{ textDecoration: 'none', color: 'white' }}
-                  to={`/pt-react-fronten/${page}`}
+                  to={`/pt-react-frontend/${page}`}
                 >
                   {page}
                 </Link>
