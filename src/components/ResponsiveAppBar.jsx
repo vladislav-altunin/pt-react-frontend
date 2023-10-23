@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
 
-const pages = ['Customers', 'Trainings', 'Calendar', 'Statistics'];
+const pages = ['customers', 'trainings', 'calendar', 'statistics'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -130,7 +130,7 @@ function ResponsiveAppBar() {
               >
                 <Link
                   style={{ textDecoration: 'none', color: 'white' }}
-                  to={`/${page}`}
+                  to={`/pt-react-fronten/${page}`}
                 >
                   {page}
                 </Link>
