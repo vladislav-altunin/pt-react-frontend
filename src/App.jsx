@@ -10,7 +10,7 @@ function App() {
     <>
       <ResponsiveAppBar />
       <Routes>
-        <Route path="/" element={<Customers />} />
+        <Route path="/pt-react-frontend/" element={<Customers />} />
       </Routes>
     </>
   );
