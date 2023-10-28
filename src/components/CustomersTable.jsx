@@ -45,7 +45,7 @@ export default function DataTable() {
   ]);
 
   useEffect(() => {
-    fetch('http://traineeapp.azurewebsites.net/api/customers')
+    fetch('https://traineeapp.azurewebsites.net/api/customers')
       .then(response => response.json())
       .then(response => {
         const content = response.content;
