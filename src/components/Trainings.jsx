@@ -30,7 +30,10 @@ export default function Trainings() {
 
         const trainingListwithRowIds = Promise.all(
           content.map((custObj, index) => {
-            return fetch(custObj.links[2].href).then(customerResponse => {
+            const custUrlHttp = custObj.links[2].href;
+            const custUrlHttps =
+              custUrlHttp.slice(0, 4) + 's' + custUrlHttp.slice(4); // this is for deploying on github
+            return fetch(custUrlHttps).then(customerResponse => {
               return customerResponse.json().then(customerData => ({
                 ...custObj,
                 id: index,
@@ -47,10 +50,10 @@ export default function Trainings() {
       });
   }, []);
 
-  useEffect(() => {
-    console.log(trainingListwithRowIds);
-    console.log(`This is customer data ${customerTestData}`);
-  }, [trainingListwithRowIds, customerTestData]);
+  // useEffect(() => {
+  //   console.log(trainingListwithRowIds);
+  //   console.log(`This is customer data ${customerTestData}`);
+  // }, [trainingListwithRowIds, customerTestData]);
 
   return (
     <div style={{ height: 400, width: '100%' }}>
