@@ -45,7 +45,7 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component="a"
-            href="/pt-react-frontend"
+            href="/pt-react-frontend/customers"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
