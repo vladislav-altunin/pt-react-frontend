@@ -32,10 +32,11 @@ export default function TrainingsTable() {
             const custUrlHttp = custObj.links[2].href;
             const custUrlHttps =
               custUrlHttp.slice(0, 4) + 's' + custUrlHttp.slice(4); // this is for deploying on github
+            const dateFormatted = dayjs(custObj.date).format('D-MMM-YY H:mm');
             return fetch(custUrlHttps).then(customerResponse => {
               return customerResponse.json().then(customerData => ({
                 ...custObj,
-                date: dayjs(customerData.date), //.format('D-MMM-YY H:mm')
+                date: dateFormatted,
                 id: index,
                 customer: `${customerData.firstname} ${customerData.lastname}`, // Assign the response to the customer property
               }));
