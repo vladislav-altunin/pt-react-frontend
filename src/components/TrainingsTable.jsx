@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import * as dayjs from 'dayjs';
+import dayjs from 'dayjs';
 
 const columns = [
   { field: 'date', headerName: 'Date', flex: 0.25 },
@@ -24,19 +24,20 @@ export default function TrainingsTable() {
   useEffect(() => {
     fetch('https://traineeapp.azurewebsites.net/api/trainings')
       .then(response => response.json())
-      .then(async response => {
+      .then(response => {
         const content = response.content;
 
-        const trainingListwithRowIds = await Promise.all(
-          content.map(async (custObj, index) => {
+        const trainingListwithRowIds = Promise.all(
+          content.map((custObj, index) => {
             const custUrlHttp = custObj.links[2].href;
             const custUrlHttps =
               custUrlHttp.slice(0, 4) + 's' + custUrlHttp.slice(4); // this is for deploying on github
 
+            // insert date here
             const formattedDate = dayjs(custObj.date).format('DD-MMM-YY hh:mm');
 
-            return fetch(custUrlHttps).then(async customerResponse => {
-              return await customerResponse.json().then(customerData => ({
+            return fetch(custUrlHttps).then(customerResponse => {
+              return customerResponse.json().then(customerData => ({
                 ...custObj,
                 id: index,
                 customer: `${customerData.firstname} ${customerData.lastname}`, // Assign the response to the customer property
