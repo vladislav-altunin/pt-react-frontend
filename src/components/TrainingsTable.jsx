@@ -24,19 +24,19 @@ export default function TrainingsTable() {
   useEffect(() => {
     fetch('https://traineeapp.azurewebsites.net/api/trainings')
       .then(response => response.json())
-      .then(response => {
+      .then(async response => {
         const content = response.content;
 
-        const trainingListwithRowIds = Promise.all(
-          content.map((custObj, index) => {
+        const trainingListwithRowIds = await Promise.all(
+          content.map(async (custObj, index) => {
             const custUrlHttp = custObj.links[2].href;
             const custUrlHttps =
               custUrlHttp.slice(0, 4) + 's' + custUrlHttp.slice(4); // this is for deploying on github
 
             const formattedDate = dayjs(custObj.date).format('DD-MMM-YY hh:mm');
 
-            return fetch(custUrlHttps).then(customerResponse => {
-              return customerResponse.json().then(customerData => ({
+            return fetch(custUrlHttps).then(async customerResponse => {
+              return await customerResponse.json().then(customerData => ({
                 ...custObj,
                 id: index,
                 customer: `${customerData.firstname} ${customerData.lastname}`, // Assign the response to the customer property
