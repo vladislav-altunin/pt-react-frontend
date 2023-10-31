@@ -32,13 +32,9 @@ export default function TrainingsTable() {
             const custUrlHttp = custObj.links[2].href;
             const custUrlHttps =
               custUrlHttp.slice(0, 4) + 's' + custUrlHttp.slice(4); // this is for deploying on github
-            const dateFormatted = dayjs('2023-10-31T13:02:25Z').format(
-              'D-MMM-YY H:mm'
-            );
             return fetch(custUrlHttps).then(customerResponse => {
               return customerResponse.json().then(customerData => ({
                 ...custObj,
-                date: dateFormatted,
                 id: index,
                 customer: `${customerData.firstname} ${customerData.lastname}`, // Assign the response to the customer property
               }));
@@ -48,6 +44,12 @@ export default function TrainingsTable() {
 
         return trainingListwithRowIds;
       })
+      .then(trainingListDateUnfomatted =>
+        trainingListDateUnfomatted.map(obj => ({
+          ...obj,
+          date: dayjs(obj.date).format('DD-MMM-YY hh:mm'),
+        }))
+      )
       .then(trainingListwithRowIds => {
         setTrainingListwithRowIds(trainingListwithRowIds);
       });
