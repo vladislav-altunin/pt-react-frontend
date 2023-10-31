@@ -4,10 +4,10 @@ import { DataGrid } from '@mui/x-data-grid';
 import * as dayjs from 'dayjs';
 
 const columns = [
-  { field: 'date', headerName: 'Date', flex: 0.3 },
-  { field: 'activity', headerName: 'Activity', flex: 0.3 },
-  { field: 'duration', headerName: 'Duration', flex: 0.1 },
-  { field: 'customer', headerName: 'Customer', flex: 0.3 },
+  { field: 'date', headerName: 'Date', flex: 0.25 },
+  { field: 'activity', headerName: 'Activity', flex: 0.25 },
+  { field: 'duration', headerName: 'Duration', flex: 0.25 },
+  { field: 'customer', headerName: 'Customer', flex: 0.25 },
 ];
 
 export default function TrainingsTable() {
@@ -35,7 +35,7 @@ export default function TrainingsTable() {
             return fetch(custUrlHttps).then(customerResponse => {
               return customerResponse.json().then(customerData => ({
                 ...custObj,
-                date: dayjs(customerData.date).format('D-MMM-YY H:mm'),
+                date: dayjs(customerData.date), //.format('D-MMM-YY H:mm')
                 id: index,
                 customer: `${customerData.firstname} ${customerData.lastname}`, // Assign the response to the customer property
               }));
