@@ -5,6 +5,7 @@ import ResponsiveAppBar from './components/ResponsiveAppBar';
 import { Route, Routes } from 'react-router';
 import Customers from './components/Customers';
 import Trainings from './components/Trainings';
+import { Box } from '@mui/material';
 
 function App() {
   return (
