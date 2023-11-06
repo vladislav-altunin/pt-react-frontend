@@ -78,7 +78,8 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   },
 }));
 
-export default function DataTable() {
+export default function DataTable(props) {
+  const { reloadStateFromCustomer } = props;
   const [customerListWithIds, setCustomerListWithIds] = useState([
     {
       id: '',
@@ -107,9 +108,23 @@ export default function DataTable() {
       });
   }, []);
 
+  // A quick fix to reload the page after saving new customer
+  // Will be passed to/from AddCustomerModal.jsx
+  // const [reload, setReload] = useState(false);
+
   useEffect(() => {
-    console.log(customerListWithIds);
-  }, [customerListWithIds]);
+    fetch('https://traineeapp.azurewebsites.net/api/customers')
+      .then(response => response.json())
+      .then(response => {
+        const content = response.content;
+        const customerListWithIds = content.map((custObj, index) => ({
+          //mapping and adding a new property id: to the oject, required by MUI grid
+          ...custObj,
+          id: index,
+        }));
+        setCustomerListWithIds(customerListWithIds);
+      });
+  }, [reloadStateFromCustomer]);
 
   return (
     <Box component="div" style={{ height: 400, width: '100%' }}>

@@ -9,7 +9,8 @@ import { Box } from '@mui/material';
 import DialogTitle from '@mui/material/DialogTitle';
 
 export default function AddCustomerModal(props) {
-  const { open, setOpen } = props;
+  //Parent:Customers
+  const { open, setOpen, setReloadFromCustomer } = props;
 
   const [newCustomer, setNewCustomer] = useState({
     firstname: '',
@@ -28,6 +29,7 @@ export default function AddCustomerModal(props) {
   const handleSave = () => {
     saveCustomer(newCustomer);
     setOpen(false);
+    setReloadFromCustomer(true);
   };
 
   const handleInputChange = event => {
