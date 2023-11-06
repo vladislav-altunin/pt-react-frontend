@@ -39,9 +39,7 @@ export default function AddCustomerModal(props) {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(customer),
-    })
-      .then(res => fetchData())
-      .catch(err => console.error(err));
+    }).catch(err => console.error(err));
   };
 
   return (
