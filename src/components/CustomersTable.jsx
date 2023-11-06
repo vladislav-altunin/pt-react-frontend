@@ -123,6 +123,7 @@ export default function DataTable(props) {
           id: index,
         }));
         setCustomerListWithIds(customerListWithIds);
+        console.log('THE TABLE HAS BEEN RERENDERED');
       });
   }, [reloadStateFromCustomer]);
 
