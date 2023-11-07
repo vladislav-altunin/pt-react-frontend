@@ -13,7 +13,10 @@ export default function Customers() {
     <Box display="flex" flexDirection="column" alignItems="center">
       <Box display="flex" flexDirection="column" width="90%" maxWidth="90%">
         <CustomersHeader />
-        <AddCustomerButton setReloadFromCustomer={setReload} />
+        <AddCustomerButton
+          setReloadFromCustomer={setReload}
+          reloadStateFromCustomerToModal={reload}
+        />
         <CustomersTable reloadStateFromCustomer={reload} />
       </Box>
     </Box>

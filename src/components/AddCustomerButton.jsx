@@ -5,7 +5,7 @@ import Add from '@mui/icons-material/Add';
 import AddCustomerModal from './AddCustomerModal';
 
 export default function AddCustomerButton(props) {
-  const { setReloadFromCustomer } = props;
+  const { setReloadFromCustomer, reloadStateFromCustomerToModal } = props;
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -26,6 +26,7 @@ export default function AddCustomerButton(props) {
         open={open}
         setOpen={setOpen}
         setReloadFromCustomer={setReloadFromCustomer}
+        reloadStateFromCustomerToModal={reloadStateFromCustomerToModal}
       />
     </Box>
   );

@@ -10,7 +10,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function AddCustomerModal(props) {
   //Parent:Customers
-  const { open, setOpen, setReloadFromCustomer } = props;
+  const {
+    open,
+    setOpen,
+    setReloadFromCustomer,
+    reloadStateFromCustomerToModal,
+  } = props;
 
   const [newCustomer, setNewCustomer] = useState({
     firstname: '',
@@ -29,7 +34,9 @@ export default function AddCustomerModal(props) {
   const handleSave = () => {
     saveCustomer(newCustomer);
     setOpen(false);
-    setReloadFromCustomer(true);
+    reloadStateFromCustomerToModal
+      ? setReloadFromCustomer(false)
+      : setReloadFromCustomer(true); // this should if true then false, it false then true
   };
 
   const handleInputChange = event => {
