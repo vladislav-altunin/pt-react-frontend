@@ -211,37 +211,7 @@ export default function DataTable(props) {
     };
 
     fetchData();
-  }, [reloadStateFromCustomerToCustomersTable]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          'https://traineeapp.azurewebsites.net/api/customers'
-        );
-        if (response.ok) {
-          const data = await response.json();
-          const content = data.content;
-
-          const customerListWithIds = content.map((custObj, index) => ({
-            ...custObj,
-            id: index,
-            // link: custObj.links[0].href, this is not required, as other solution was found
-          }));
-
-          setCustomerListWithIds(customerListWithIds);
-        } else {
-          throw new Error('Failed to fetch data');
-        }
-      } catch (error) {
-        console.error(error);
-        // Handle errors - set a default value or an empty array
-        setCustomerListWithIds([]); // For instance, setting it to an empty array
-      }
-    };
-
-    fetchData();
-  }, [reloadAfterEditFromCustomers]);
+  }, [reloadStateFromCustomerToCustomersTable, reloadAfterEditFromCustomers]);
 
   return (
     <Box component="div" style={{ height: 400, width: '100%' }}>
