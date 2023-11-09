@@ -5,32 +5,6 @@ import { Box } from '@mui/material';
 import OptionsButton from './OptionsButton';
 import { styled } from '@mui/material/styles';
 
-const columns = [
-  { field: 'firstname', headerName: 'First name', flex: 0.16 },
-  { field: 'lastname', headerName: 'Last name', flex: 0.16 },
-  { field: 'email', headerName: 'Email', flex: 0.16 },
-  { field: 'phone', headerName: 'Phone', flex: 0.1 },
-  { field: 'streetaddress', headerName: 'Addreess', flex: 0.15 },
-  { field: 'postcode', headerName: 'Postcode', flex: 0.1 },
-  { field: 'city', headerName: 'City', flex: 0.1 },
-  {
-    field: 'actions',
-    headerName: 'Actions',
-    headerAlign: 'center',
-    align: 'center',
-    flex: 0.07,
-    renderCell: params => {
-      const handleDelete = () => {
-        const id = params.row.id;
-        // Perform delete action based on id
-        console.log(`Delete item with ID: ${id}`);
-      };
-
-      return <OptionsButton />;
-    },
-  },
-];
-
 const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   border: 0,
   color:
@@ -79,7 +53,41 @@ const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
 }));
 
 export default function DataTable(props) {
-  const { reloadStateFromCustomer } = props;
+  const { reloadStateFromCustomer, setReloadFromCustomers } = props;
+
+  const columns = [
+    { field: 'firstname', headerName: 'First name', flex: 0.16 },
+    { field: 'lastname', headerName: 'Last name', flex: 0.16 },
+    { field: 'email', headerName: 'Email', flex: 0.16 },
+    { field: 'phone', headerName: 'Phone', flex: 0.1 },
+    { field: 'streetaddress', headerName: 'Addreess', flex: 0.15 },
+    { field: 'postcode', headerName: 'Postcode', flex: 0.1 },
+    { field: 'city', headerName: 'City', flex: 0.1 },
+    {
+      field: 'actions',
+      headerName: 'Actions',
+      headerAlign: 'center',
+      align: 'center',
+      flex: 0.07,
+      valueGetter: params => params.row,
+      renderCell: params => {
+        //here passing the link to CustomerTable => ended up passing the whole obj
+        //Value getter is a MUST, it's not working straight away because of async
+        //Data is not loaded with the first render => so it's undefined
+        //Interestingly, renderCell would work even if valueGetter was going after it
+        const lnk = params.value;
+
+        return (
+          <OptionsButton
+            lnkFromCustomerTable={lnk}
+            setReloadFromCustomersTable={setReloadFromCustomers}
+            reloadStateFromCustomersTable={reloadStateFromCustomer}
+          />
+        );
+      },
+    },
+  ];
+
   const [customerListWithIds, setCustomerListWithIds] = useState([
     {
       id: '',
@@ -90,28 +98,65 @@ export default function DataTable(props) {
       streetaddress: 'test',
       postcode: 'test',
       city: 'test',
-      sthelse: 'anoter else',
     },
   ]);
 
+  // This block with try/catch for when data is still lodaing
   useEffect(() => {
-    fetch('https://traineeapp.azurewebsites.net/api/customers')
-      .then(response => response.json())
-      .then(response => {
-        const content = response.content;
-        const customerListWithIds = content.map((custObj, index) => ({
-          //mapping and adding a new property id: to the oject, required by MUI grid
-          ...custObj,
-          id: index,
-        }));
-        setCustomerListWithIds(customerListWithIds);
-      });
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          'https://traineeapp.azurewebsites.net/api/customers'
+        );
+        if (response.ok) {
+          const data = await response.json();
+          const content = data.content;
+
+          const customerListWithIds = content.map((custObj, index) => ({
+            ...custObj,
+            id: index,
+            // link: custObj.links[0].href, this is not required, as other solution was found
+          }));
+
+          setCustomerListWithIds(customerListWithIds);
+        } else {
+          throw new Error('Failed to fetch data');
+        }
+      } catch (error) {
+        console.error(error);
+        // Handle errors - set a default value or an empty array
+        setCustomerListWithIds([]); // For instance, setting it to an empty array
+      }
+    };
+
+    fetchData();
   }, []);
+
+  //This is a working block, just without try/catch
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //   fetch('https://traineeapp.azurewebsites.net/api/customers')
+  //     .then(response => response.json())
+  //     .then(response => {
+  //       const content = response.content;
+  //       const customerListWithIds = content.map((custObj, index) => ({
+  //         //mapping and adding a new property id: to the oject, required by MUI grid
+  //         ...custObj,
+  //         id: index,
+  //         link: custObj.links[0].href,
+  //       }));
+  //       setCustomerListWithIds(customerListWithIds);
+  //       console.log(customerListWithIds);
+  //     });
+  //   }
+  // }, []);
 
   // A quick fix to reload the page after saving new customer
   // Will be passed to/from AddCustomerModal.jsx
   // const [reload, setReload] = useState(false);
 
+  // Uncomment when possible
+
   useEffect(() => {
     fetch('https://traineeapp.azurewebsites.net/api/customers')
       .then(response => response.json())
@@ -123,7 +168,6 @@ export default function DataTable(props) {
           id: index,
         }));
         setCustomerListWithIds(customerListWithIds);
-        console.log('THE TABLE HAS BEEN RERENDERED');
       });
   }, [reloadStateFromCustomer]);
 

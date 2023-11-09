@@ -29,14 +29,32 @@ export default function AddCustomerModal(props) {
 
   const handleCancel = () => {
     setOpen(false);
+    setNewCustomer({
+      firstname: '',
+      lastname: '',
+      email: '',
+      phone: '',
+      streetaddress: '',
+      postcode: '',
+      city: '',
+    });
+    //ensures current state even after cancel action
+    setReloadFromCustomer(currState => !currState);
   };
 
   const handleSave = () => {
     saveCustomer(newCustomer);
     setOpen(false);
-    reloadStateFromCustomerToModal
-      ? setReloadFromCustomer(false)
-      : setReloadFromCustomer(true); // this should if true then false, it false then true
+    setNewCustomer({
+      firstname: '',
+      lastname: '',
+      email: '',
+      phone: '',
+      streetaddress: '',
+      postcode: '',
+      city: '',
+    });
+    setReloadFromCustomer(currState => !currState);
   };
 
   const handleInputChange = event => {

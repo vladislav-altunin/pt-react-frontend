@@ -17,7 +17,10 @@ export default function Customers() {
           setReloadFromCustomer={setReload}
           reloadStateFromCustomerToModal={reload}
         />
-        <CustomersTable reloadStateFromCustomer={reload} />
+        <CustomersTable
+          reloadStateFromCustomer={reload}
+          setReloadFromCustomers={setReload}
+        />
       </Box>
     </Box>
   );
