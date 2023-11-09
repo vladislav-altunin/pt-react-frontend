@@ -91,6 +91,7 @@ export default function EditCustomerModal(props) {
     updateCustomer();
     setOpenEditCustomerModalFromOptionsButton(false);
     reloadTable();
+    reloadTable();
   };
 
   // const [open, setOpen] = useState(openEditCustomerModalFromOptionsButton);
