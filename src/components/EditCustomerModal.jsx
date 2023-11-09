@@ -10,12 +10,10 @@ import Button from '@mui/material/Button';
 
 export default function EditCustomerModal(props) {
   const {
-    custObj,
     openEditCustomerModalFromOptionsButton,
     setOpenEditCustomerModalFromOptionsButton,
     lnkFromOptionsButton,
-    reloadStateOptionsButton,
-    setReloadFromOptionsButton,
+    setReloadAfterEditFromOptionsButton,
   } = props;
 
   //cust object is created to keep lnkFromOptionsButton unchanged
@@ -54,7 +52,7 @@ export default function EditCustomerModal(props) {
     });
     //this would ensure that the state is always updated, even after cancel
     //could not prove but it seems it works
-    setReloadFromOptionsButton(currState => !currState);
+    setReloadAfterEditFromOptionsButton(currState => !currState);
   };
 
   //updateCustomer() was split into two functions, handleSave() is now a separate function
@@ -77,18 +75,14 @@ export default function EditCustomerModal(props) {
   };
 
   const reloadTable = () => {
-    // reloadStateOptionsButton
-    //   ? setReloadFromOptionsButton(false)
-    //   : setReloadFromOptionsButton(true);
-
     //state update based on previous / current state ensures that the table updates
     // and the most recent sate is used
-    //the commednted out section above showed that the state is not being updated each time
-    setReloadFromOptionsButton(currState => !currState);
+    setReloadAfterEditFromOptionsButton(currState => !currState);
   };
 
-  const handleSave = () => {
-    updateCustomer();
+  //async is CRUCIAL in this case eventhough updateCustomer() is async itself
+  const handleSave = async () => {
+    const updatedCust = await updateCustomer();
     setOpenEditCustomerModalFromOptionsButton(false);
     reloadTable();
   };

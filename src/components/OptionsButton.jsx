@@ -59,11 +59,7 @@ const StyledMenu = styled(props => (
 const ITEM_HEIGHT = 48;
 
 export default function OptionsButton(props) {
-  const {
-    lnkFromCustomerTable,
-    reloadStateFromCustomersTable,
-    setReloadFromCustomersTable,
-  } = props;
+  const { lnkFromCustomerTable, setReloadAfterEditFromCustomersTable } = props;
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -127,8 +123,9 @@ export default function OptionsButton(props) {
         openEditCustomerModalFromOptionsButton={openEditCustomerModal}
         setOpenEditCustomerModalFromOptionsButton={setOpenEditCustomerModal}
         lnkFromOptionsButton={lnkFromCustomerTable}
-        setReloadFromOptionsButton={setReloadFromCustomersTable}
-        reloadStateOptionsButton={reloadStateFromCustomersTable}
+        setReloadAfterEditFromOptionsButton={
+          setReloadAfterEditFromCustomersTable
+        }
       />
     </div>
   );

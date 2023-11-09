@@ -10,12 +10,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 export default function AddCustomerModal(props) {
   //Parent:Customers
-  const {
-    open,
-    setOpen,
-    setReloadFromCustomer,
-    reloadStateFromCustomerToModal,
-  } = props;
+  const { open, setOpen, setReloadFromAddCustomerButton } = props;
 
   const [newCustomer, setNewCustomer] = useState({
     firstname: '',
@@ -39,7 +34,7 @@ export default function AddCustomerModal(props) {
       city: '',
     });
     //ensures current state even after cancel action
-    setReloadFromCustomer(currState => !currState);
+    setReloadFromAddCustomerButton(currState => !currState);
   };
 
   const handleSave = () => {
@@ -54,7 +49,7 @@ export default function AddCustomerModal(props) {
       postcode: '',
       city: '',
     });
-    setReloadFromCustomer(currState => !currState);
+    setReloadFromAddCustomerButton(currState => !currState);
   };
 
   const handleInputChange = event => {
