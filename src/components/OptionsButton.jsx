@@ -10,6 +10,7 @@ import Divider from '@mui/material/Divider';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditCustomerModal from './EditCustomerModal';
+import DeleteCustomerModal from './DeleteCustomerModal';
 
 const options = ['Add training', 'Edit customer', 'Delete customer'];
 
@@ -68,6 +69,7 @@ export default function OptionsButton(props) {
   };
 
   const [openEditCustomerModal, setOpenEditCustomerModal] = useState(false);
+  const [openDeleteCustomerModal, setOpenDeleteCustomerModal] = useState(false);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -75,6 +77,13 @@ export default function OptionsButton(props) {
 
   const handleEdit = () => {
     setOpenEditCustomerModal(true);
+    //hide options
+    setAnchorEl(null);
+  };
+
+  const handleDelete = () => {
+    setOpenDeleteCustomerModal(true);
+    //hide options
     setAnchorEl(null);
   };
 
@@ -114,14 +123,25 @@ export default function OptionsButton(props) {
           Edit
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={handleDelete} disableRipple>
           <DeleteIcon />
           Delete
         </MenuItem>
       </StyledMenu>
+
+      {/* Modals that appear onclick */}
+
       <EditCustomerModal
         openEditCustomerModalFromOptionsButton={openEditCustomerModal}
         setOpenEditCustomerModalFromOptionsButton={setOpenEditCustomerModal}
+        lnkFromOptionsButton={lnkFromCustomerTable}
+        setReloadAfterEditFromOptionsButton={
+          setReloadAfterEditFromCustomersTable
+        }
+      />
+      <DeleteCustomerModal
+        openDeleteCustomerModalFromOptionsButton={openDeleteCustomerModal}
+        setOpenDeleteCustomerModalFromOptionsButton={setOpenDeleteCustomerModal}
         lnkFromOptionsButton={lnkFromCustomerTable}
         setReloadAfterEditFromOptionsButton={
           setReloadAfterEditFromCustomersTable

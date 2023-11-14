@@ -57,7 +57,7 @@ export default function EditCustomerModal(props) {
 
   //updateCustomer() was split into two functions, handleSave() is now a separate function
   const updateCustomer = async () => {
-    //post request parameters
+    //PUT request parameters
     const options = {
       method: 'PUT',
       headers: {
