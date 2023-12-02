@@ -84,7 +84,7 @@ export default function AddTrainingModal(props) {
   };
 
   const handlePostReq = training => {
-    fetch('http://traineeapp.azurewebsites.net/api/trainings', {
+    fetch('https://traineeapp.azurewebsites.net/api/trainings', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(training),
