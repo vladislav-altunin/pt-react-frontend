@@ -67,11 +67,15 @@ export default function AddTrainingModal(props) {
   const updateTrainingAsync = async () => {
     return new Promise(resolve => {
       setNewTraining(prevTraining => {
+        //convert the link from http to https (needed for github deployment)
+        const httpCustLink = lnkFromOptionsButton.links[0].href;
+        const httpsCustLink =
+          httpCustLink.slice(0, 4) + 's' + httpCustLink.slice(4);
         // Update the state based on the previous state
         const updatedTraining = {
           ...prevTraining,
           date: datePicker.format('YYYY-MM-DDTHH:mm:ss.SSSZ'),
-          customer: lnkFromOptionsButton.links[0].href,
+          customer: httpsCustLink,
         };
         // Return the updated state
         resolve(updatedTraining);
