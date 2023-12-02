@@ -11,6 +11,7 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditCustomerModal from './EditCustomerModal';
 import DeleteCustomerModal from './DeleteCustomerModal';
+import AddTrainingModal from './AddTrainingModal';
 
 const options = ['Add training', 'Edit customer', 'Delete customer'];
 
@@ -60,7 +61,11 @@ const StyledMenu = styled(props => (
 const ITEM_HEIGHT = 48;
 
 export default function OptionsButton(props) {
-  const { lnkFromCustomerTable, setReloadAfterEditFromCustomersTable } = props;
+  const {
+    lnkFromCustomerTable,
+    setReloadAfterEditFromCustomersTable,
+    setReloadAfterTrainingAddingFromCustomersTable,
+  } = props;
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -70,6 +75,7 @@ export default function OptionsButton(props) {
 
   const [openEditCustomerModal, setOpenEditCustomerModal] = useState(false);
   const [openDeleteCustomerModal, setOpenDeleteCustomerModal] = useState(false);
+  const [openAddTrainingModal, setOpenAddTrainingModal] = useState(false);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -83,6 +89,12 @@ export default function OptionsButton(props) {
 
   const handleDelete = () => {
     setOpenDeleteCustomerModal(true);
+    //hide options
+    setAnchorEl(null);
+  };
+
+  const handleAddTraining = () => {
+    setOpenAddTrainingModal(true);
     //hide options
     setAnchorEl(null);
   };
@@ -114,7 +126,7 @@ export default function OptionsButton(props) {
           },
         }}
       >
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem onClick={handleAddTraining} disableRipple>
           <AddIcon />
           Add Training
         </MenuItem>
@@ -145,6 +157,14 @@ export default function OptionsButton(props) {
         lnkFromOptionsButton={lnkFromCustomerTable}
         setReloadAfterEditFromOptionsButton={
           setReloadAfterEditFromCustomersTable
+        }
+      />
+      <AddTrainingModal
+        openAddTrainingModalFromOptionsButton={openAddTrainingModal}
+        setOpenAddTrainingModalFromOptionsButton={setOpenAddTrainingModal}
+        lnkFromOptionsButton={lnkFromCustomerTable}
+        setReloadAfterTrainingAddingFromOptionsButton={
+          setReloadAfterTrainingAddingFromCustomersTable
         }
       />
     </div>

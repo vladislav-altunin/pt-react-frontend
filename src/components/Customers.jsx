@@ -11,6 +11,9 @@ export default function Customers() {
   const [reload, setReload] = useState(false);
   //Reload after updating an existing customer
   const [reloadAfterEdit, setReloadAfterEdit] = useState(false);
+  //Reload after adding a training
+  const [reloadAfterTrainingAdding, setReloadAfterTrainingAdding] =
+    useState(false);
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
@@ -21,6 +24,10 @@ export default function Customers() {
           reloadStateFromCustomerToCustomersTable={reload}
           reloadAfterEditFromCustomers={reloadAfterEdit}
           setReloadAfterEditFromCustomers={setReloadAfterEdit}
+          reloadAfterTrainingAddingFromCustomers={reloadAfterTrainingAdding}
+          setReloadAfterTrainingAddingFromCustomers={
+            setReloadAfterTrainingAdding
+          }
         />
       </Box>
     </Box>

@@ -9,7 +9,6 @@ import { Box } from '@mui/material';
 import DialogTitle from '@mui/material/DialogTitle';
 
 export default function AddCustomerModal(props) {
-  //Parent:Customers
   const { open, setOpen, setReloadFromAddCustomerButton } = props;
 
   const [newCustomer, setNewCustomer] = useState({

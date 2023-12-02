@@ -61,6 +61,8 @@ export default function DataTable(props) {
     reloadStateFromCustomerToCustomersTable,
     reloadAfterEditFromCustomers,
     setReloadAfterEditFromCustomers,
+    reloadAfterTrainingAddingFromCustomers,
+    setReloadAfterTrainingAddingFromCustomers,
   } = props;
 
   const columns = [
@@ -90,6 +92,9 @@ export default function DataTable(props) {
             lnkFromCustomerTable={lnk}
             setReloadAfterEditFromCustomersTable={
               setReloadAfterEditFromCustomers
+            }
+            setReloadAfterTrainingAddingFromCustomersTable={
+              setReloadAfterTrainingAddingFromCustomers
             }
             // setReloadFromCustomersTable={setReloadFromCustomers}
             // reloadStateFromCustomersTable={reloadStateFromCustomer}
@@ -211,7 +216,11 @@ export default function DataTable(props) {
     };
 
     fetchData();
-  }, [reloadStateFromCustomerToCustomersTable, reloadAfterEditFromCustomers]);
+  }, [
+    reloadStateFromCustomerToCustomersTable,
+    reloadAfterEditFromCustomers,
+    reloadAfterTrainingAddingFromCustomers,
+  ]);
 
   return (
     <Box component="div" style={{ height: 400, width: '100%' }}>
