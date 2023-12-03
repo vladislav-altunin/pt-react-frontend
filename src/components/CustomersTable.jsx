@@ -66,10 +66,10 @@ export default function DataTable(props) {
   } = props;
 
   const columns = [
-    { field: 'firstname', headerName: 'First name', flex: 0.16 },
-    { field: 'lastname', headerName: 'Last name', flex: 0.16 },
+    { field: 'firstname', headerName: 'First name', flex: 0.13 },
+    { field: 'lastname', headerName: 'Last name', flex: 0.13 },
     { field: 'email', headerName: 'Email', flex: 0.16 },
-    { field: 'phone', headerName: 'Phone', flex: 0.1 },
+    { field: 'phone', headerName: 'Phone', flex: 0.16 },
     { field: 'streetaddress', headerName: 'Addreess', flex: 0.15 },
     { field: 'postcode', headerName: 'Postcode', flex: 0.1 },
     { field: 'city', headerName: 'City', flex: 0.1 },
@@ -118,74 +118,35 @@ export default function DataTable(props) {
   ]);
 
   // This block with try/catch for when data is still lodaing
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          'https://traineeapp.azurewebsites.net/api/customers'
-        );
-        if (response.ok) {
-          const data = await response.json();
-          const content = data.content;
-
-          const customerListWithIds = content.map((custObj, index) => ({
-            ...custObj,
-            id: index,
-            // link: custObj.links[0].href, this is not required, as other solution was found
-          }));
-
-          setCustomerListWithIds(customerListWithIds);
-        } else {
-          throw new Error('Failed to fetch data');
-        }
-      } catch (error) {
-        console.error(error);
-        // Handle errors - set a default value or an empty array
-        setCustomerListWithIds([]); // For instance, setting it to an empty array
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  //This is a working block, just without try/catch
   // useEffect(() => {
   //   const fetchData = async () => {
-  //   fetch('https://traineeapp.azurewebsites.net/api/customers')
-  //     .then(response => response.json())
-  //     .then(response => {
-  //       const content = response.content;
-  //       const customerListWithIds = content.map((custObj, index) => ({
-  //         //mapping and adding a new property id: to the oject, required by MUI grid
-  //         ...custObj,
-  //         id: index,
-  //         link: custObj.links[0].href,
-  //       }));
-  //       setCustomerListWithIds(customerListWithIds);
-  //       console.log(customerListWithIds);
-  //     });
-  //   }
+  //     try {
+  //       const response = await fetch(
+  //         'https://traineeapp.azurewebsites.net/api/customers'
+  //       );
+  //       if (response.ok) {
+  //         const data = await response.json();
+  //         const content = data.content;
+
+  //         const customerListWithIds = content.map((custObj, index) => ({
+  //           ...custObj,
+  //           id: index,
+  //           // link: custObj.links[0].href, this is not required, as other solution was found
+  //         }));
+
+  //         setCustomerListWithIds(customerListWithIds);
+  //       } else {
+  //         throw new Error('Failed to fetch data');
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //       // Handle errors - set a default value or an empty array
+  //       setCustomerListWithIds([]); // For instance, setting it to an empty array
+  //     }
+  //   };
+
+  //   fetchData();
   // }, []);
-
-  // A quick fix to reload the page after saving new customer
-  // Will be passed to/from AddCustomerModal.jsx
-  // const [reload, setReload] = useState(false);
-
-  // Uncomment when possible
-
-  // useEffect(() => {
-  //   fetch('https://traineeapp.azurewebsites.net/api/customers')
-  //     .then(response => response.json())
-  //     .then(response => {
-  //       const content = response.content;
-  //       const customerListWithIds = content.map((custObj, index) => ({
-  //         //mapping and adding a new property id: to the oject, required by MUI grid
-  //         ...custObj,
-  //         id: index,
-  //       }));
-  //       setCustomerListWithIds(customerListWithIds);
-  //     });
-  // }, [reloadStateFromCustomer]);
 
   // This block with try/catch for when data is still lodaing
   useEffect(() => {

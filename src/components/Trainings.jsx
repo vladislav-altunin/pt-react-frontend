@@ -1,15 +1,22 @@
 import React from 'react';
 import TrainingsTable from './TrainingsTable';
+import TrainingsHeader from './TrainingsHeader';
 import '../App.css';
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 export default function Trainings() {
   return (
-    <div className="tableComponent">
-      <Typography variant="h5" gutterBottom>
-        Trainings
-      </Typography>
-      <TrainingsTable />
-    </div>
+    <Box display="flex" flexDirection="column" alignItems="center">
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        width="90%"
+        maxWidth="90%"
+      >
+        <TrainingsHeader />
+        <TrainingsTable />
+      </Box>
+    </Box>
   );
 }
