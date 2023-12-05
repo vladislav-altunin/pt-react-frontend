@@ -15,10 +15,10 @@ export default function AddCustomerButton(props) {
   return (
     <Box display="flex" flexDirection="column" alignItems="flex-end">
       <Button
-        variant="outlined"
+        variant="soft"
         onClick={handleClickOpen}
         startDecorator={<Add />}
-        style={{ margin: 15 }}
+        // style={{ margin: 15 }}
       >
         Add customer
       </Button>

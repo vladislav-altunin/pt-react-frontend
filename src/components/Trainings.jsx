@@ -13,6 +13,7 @@ export default function Trainings() {
         alignItems="center"
         width="90%"
         maxWidth="90%"
+        gap={5}
       >
         <TrainingsHeader />
         <TrainingsTable />

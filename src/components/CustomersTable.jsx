@@ -4,6 +4,10 @@ import { DataGrid } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
 import OptionsButton from './OptionsButton';
 import { styled } from '@mui/material/styles';
+import { CSVLink } from 'react-csv';
+
+import Button from '@mui/joy/Button';
+import Add from '@mui/icons-material/Add';
 
 const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   border: 0,
@@ -183,10 +187,12 @@ export default function DataTable(props) {
     reloadAfterTrainingAddingFromCustomers,
   ]);
 
+  const handleClickOpen = () => {};
+
   return (
     <Box component="div" style={{ height: 400, width: '100%' }}>
       <StyledDataGrid
-        style={{ margin: 15 }}
+        // style={{ margin: 5, marginTop: 20 }}
         rows={customerListWithIds}
         columns={columns}
         initialState={{
