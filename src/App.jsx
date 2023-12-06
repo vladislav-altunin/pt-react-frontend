@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router';
 import Customers from './components/Customers';
 import Trainings from './components/Trainings';
 import { Box } from '@mui/material';
+import PtCalendar from './components/PtCalendar';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/pt-react-frontend" element={<Customers />} />
         <Route path="/pt-react-frontend/customers" element={<Customers />} />
         <Route path="/pt-react-frontend/trainings" element={<Trainings />} />
+        <Route path="/pt-react-frontend/calendar" element={<PtCalendar />} />
       </Routes>
     </>
   );
