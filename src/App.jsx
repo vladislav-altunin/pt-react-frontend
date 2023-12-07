@@ -7,6 +7,7 @@ import Customers from './components/Customers';
 import Trainings from './components/Trainings';
 import { Box } from '@mui/material';
 import PtCalendar from './components/PtCalendar';
+import Statistics from './components/Statistics';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/pt-react-frontend/customers" element={<Customers />} />
         <Route path="/pt-react-frontend/trainings" element={<Trainings />} />
         <Route path="/pt-react-frontend/calendar" element={<PtCalendar />} />
+        <Route path="/pt-react-frontend/statistics" element={<Statistics />} />
       </Routes>
     </>
   );

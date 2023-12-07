@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import { Box, Button } from '@mui/material';
 import CalendarHeader from './CalendarHeader';
 import { useState, useEffect, useRef } from 'react';
+
 // import 'react-big-calendar/lib/addons/dragAndDrop/styles'; // if using DnD
 
 const localizer = dayjsLocalizer(dayjs);
@@ -68,6 +69,7 @@ export default function PtCalendar() {
           const eventObj = {
             id: eventItem.id,
             customer: eventItem.names,
+            duration: eventItem.duration,
             title: `${eventItem.activity} / ${eventItem.names}`,
             start: dayjs(eventItem.date).toDate(),
             end: dayjs(eventItem.date)
@@ -104,6 +106,7 @@ export default function PtCalendar() {
           // endAccessor="end"
           // style={{ height: 500 }}
         />
+        <Button onClick={consoleList}>Console</Button>
       </Box>
     </Box>
   );
