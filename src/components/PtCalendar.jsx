@@ -3,27 +3,12 @@ import { Calendar, dayjsLocalizer } from 'react-big-calendar';
 import dayjs from 'dayjs';
 import { Box, Button } from '@mui/material';
 import CalendarHeader from './CalendarHeader';
-import { useState, useEffect, useRef } from 'react';
-
-// import 'react-big-calendar/lib/addons/dragAndDrop/styles'; // if using DnD
+import { useState, useEffect } from 'react';
 
 const localizer = dayjsLocalizer(dayjs);
 
-const myEventsList = [
-  {
-    id: 0,
-    title: 'All Day Event very long title',
-    // allDay: false,
-    start: dayjs('2023-12-06T22:00:52+0000').toDate(),
-    end: dayjs('2023-12-06T22:30:52+0000').toDate(),
-  },
-];
-
 export default function PtCalendar() {
-  //First set of data
-  // const [trainingListWithLinksAndIds, setTrainingListWithLinksAndIds] =
-  //   useState([]);
-  //Second set of data with customer names
+  //Set of data with customer names
   const [trainingsWithIdsAndNames, setTrainingsWithIdsAndNames] = useState([]);
   //Load the list of trainings
   useEffect(() => {
@@ -41,8 +26,8 @@ export default function PtCalendar() {
           link: custObj.links[2].href,
         }));
 
-        // setTrainingListWithLinksAndIds(modifiedList);
-
+        //Fetching customers name (needed to display in the calendar)
+        //Another set of promises
         const fetchCustomerNamesAndModifyObj = modifiedList.map(
           async object => {
             const custUrlHttp = object.links[2].href;
@@ -78,16 +63,13 @@ export default function PtCalendar() {
           };
           return eventObj;
         });
-        //Set second set of data
+        //Set final version of the event objects
         setTrainingsWithIdsAndNames(eventList);
       }
     };
     fetchData();
   }, []);
 
-  const consoleList = () => {
-    console.log(trainingsWithIdsAndNames);
-  };
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
       <Box
@@ -99,14 +81,7 @@ export default function PtCalendar() {
         gap={5}
       >
         <CalendarHeader />
-        <Calendar
-          localizer={localizer}
-          events={trainingsWithIdsAndNames}
-          // startAccessor="start"
-          // endAccessor="end"
-          // style={{ height: 500 }}
-        />
-        <Button onClick={consoleList}>Console</Button>
+        <Calendar localizer={localizer} events={trainingsWithIdsAndNames} />
       </Box>
     </Box>
   );

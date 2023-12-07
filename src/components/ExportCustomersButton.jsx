@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from '@mui/joy/Button';
 import { Box } from '@mui/material';
-import Add from '@mui/icons-material/Add';
 import Download from '@mui/icons-material/Download';
 
 export default function ExportCustomersButton() {

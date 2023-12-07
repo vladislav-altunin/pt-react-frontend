@@ -5,16 +5,13 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import Alert from '@mui/material/Alert';
-import { useState, useEffect, useRef } from 'react';
 
 export default function DeleteTrainingModal(props) {
   const {
     deleteTrainingModalOpenFromTrainingsTable,
     setDeleteTrainingModalOpenFromTrainingsTable,
-    setConfirmDeletionTrainingsTable,
     handleDeleteReqFromTrainingsTable,
     trainingLinkFromTrainingsTable,
-    confirmDeletionFromTrainingsTable,
   } = props;
 
   const confirmDeleteTraining = async () => {

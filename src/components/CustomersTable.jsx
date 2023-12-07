@@ -4,10 +4,6 @@ import { DataGrid } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
 import OptionsButton from './OptionsButton';
 import { styled } from '@mui/material/styles';
-import { CSVLink } from 'react-csv';
-
-import Button from '@mui/joy/Button';
-import Add from '@mui/icons-material/Add';
 
 const StyledDataGrid = styled(DataGrid)(({ theme }) => ({
   border: 0,
@@ -111,46 +107,15 @@ export default function DataTable(props) {
   const [customerListWithIds, setCustomerListWithIds] = useState([
     {
       id: '',
-      firstname: 'test',
-      lastlame: 'test',
-      email: 'test',
-      phone: 'test',
-      streetaddress: 'test',
-      postcode: 'test',
-      city: 'test',
+      firstname: '',
+      lastlame: '',
+      email: '',
+      phone: '',
+      streetaddress: '',
+      postcode: '',
+      city: '',
     },
   ]);
-
-  // This block with try/catch for when data is still lodaing
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         'https://traineeapp.azurewebsites.net/api/customers'
-  //       );
-  //       if (response.ok) {
-  //         const data = await response.json();
-  //         const content = data.content;
-
-  //         const customerListWithIds = content.map((custObj, index) => ({
-  //           ...custObj,
-  //           id: index,
-  //           // link: custObj.links[0].href, this is not required, as other solution was found
-  //         }));
-
-  //         setCustomerListWithIds(customerListWithIds);
-  //       } else {
-  //         throw new Error('Failed to fetch data');
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //       // Handle errors - set a default value or an empty array
-  //       setCustomerListWithIds([]); // For instance, setting it to an empty array
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
 
   // This block with try/catch for when data is still lodaing
   useEffect(() => {
@@ -166,7 +131,6 @@ export default function DataTable(props) {
           const customerListWithIds = content.map((custObj, index) => ({
             ...custObj,
             id: index,
-            // link: custObj.links[0].href, this is not required, as other solution was found
           }));
 
           setCustomerListWithIds(customerListWithIds);
@@ -175,8 +139,8 @@ export default function DataTable(props) {
         }
       } catch (error) {
         console.error(error);
-        // Handle errors - set a default value or an empty array
-        setCustomerListWithIds([]); // For instance, setting it to an empty array
+        // Setting to an empty array for error handling proposes
+        setCustomerListWithIds([]);
       }
     };
 
